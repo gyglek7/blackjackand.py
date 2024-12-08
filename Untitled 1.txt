@@ -1,80 +1,58 @@
-﻿import tkinter as tk
+import tkinter as tk
+
 from tkinter import messagebox
-import random
 
-# Initial currency
-currency = 100
+score = 0
 
-# Create the main window
 window = tk.Tk()
-window.title("Gambling Game")
+window.title("Big Agreer")
 
-# Add a label to show the current balance
-balance_label = tk.Label(window, text=f"Current balance: ${currency}")
-balance_label.pack(pady=10)
+label = tk.Label(window, text="Solve this really hard equation: 5 = 3x+1/2")
+label.pack(pady=10)
+
+entry = tk.Entry(window)
+entry.pack(pady=10)
 
 
-# Function for the gambling game
-def play_game():
-    global currency
-
-    # Get the user's bet amount from the entry field
-    betprice = int(entry_bet.get())
-
-    if betprice > currency:
-        messagebox.showerror("Insufficient Funds", "You do not have enough money to bet!")
-        return
-
-    # Initialize the deck and draw two cards for the player
-    deck = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6,
-            7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
-            10, 10, 10, 10, 10, 10]
-
-    # Player's turn
-    player_card1 = deck[random.randint(0, 51)]
-    player_card2 = deck[random.randint(0, 51)]
-    player_total = player_card1 + player_card2
-
-    # Smith's turn (the opponent)
-    smith_card1 = deck[random.randint(0, 51)]
-    smith_card2 = deck[random.randint(0, 51)]
-    smith_total = smith_card1 + smith_card2
-
-    # Display totals in the GUI
-    label_player_sum.config(text=f"Your total: {player_total}")
-    label_smith_sum.config(text=f"Smith's total: {smith_total}")
-
-    # Determine the outcome of the game
-    if player_total > smith_total:
-        currency += betprice
-        messagebox.showinfo("You Won!", f"You won! Your new balance is ${currency}.")
+def button_1():
+    global score
+    user_input = int(entry.get())
+    if user_input == 3:
+        score += 1
+        print("You are correct, your score is ", score)
+        messagebox.showinfo("You won ZZZ", "Congrats comrade, Z",)
     else:
-        currency -= betprice
-        messagebox.showinfo("You Lost", f"You lost! Your new balance is ${currency}.")
-
-    # Update balance display
-    balance_label.config(text=f"Current balance: ${currency}")
-
-    # Check if the user is out of money
-    if currency <= 0:
-        messagebox.showinfo("Game Over", "You're out of money! Game Over.")
-        window.quit()
+        print("You are incorrect :<")
+        messagebox.showerror("You lost (no z :<)", "You lost comrade :/, gotta try harder")
 
 
-# Add an input field for the user to enter the bet
-entry_bet = tk.Entry(window)
-entry_bet.pack(pady=10)
+button = tk.Button(window, text="Check yo self ", command=button_1)
+button.pack(pady=20)
 
-# Add a button to start the game
-bet_button = tk.Button(window, text="Place Bet", command=play_game)
-bet_button.pack(pady=20)
+label2 = tk.Label(window, text="Solve this really hard equation: 2+5/3x=7")
+label2.pack(pady=20)
 
-# Labels to display the player's and Smith's totals
-label_player_sum = tk.Label(window, text="Your total: 0")
-label_player_sum.pack(pady=5)
+entry2 = tk.Entry(window)
+entry2.pack(pady=10)
 
-label_smith_sum = tk.Label(window, text="Smith's total: 0")
-label_smith_sum.pack(pady=5)
+
+def button_2():
+    global score
+    user_input = float(entry2.get())
+    if user_input == 0.33:
+        score +=1
+        print("Congrats, your score is now:", score)
+        messagebox.showinfo("You are correct"," hooray :3")
+    else:
+        print("You are incorrect")
+        messagebox.showerror("You ain't correct","gotta eat more math books ")
+
+button2 = tk.Button(window, text="Check yo 2nd self", command=button_2)
+button2.pack(pady=20)
+
+
+
+window.mainloop()
 
 
 
